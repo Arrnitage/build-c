@@ -25,6 +25,9 @@ jobs:
           echo "[+] Check make"
           make -v
           echo "[+] Check project file"
+          pwd
+          ls -lh ../
+          echo "ls current"
           ls
           echo "[+] Run make"
           make
