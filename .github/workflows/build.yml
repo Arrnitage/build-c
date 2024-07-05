@@ -15,7 +15,6 @@ jobs:
         os: [ubuntu-latest]
 
     steps:
-      - uses: actions/checkout@v2
       - name: list file in workdir
         run: |
           echo "[+] Workdir: ${{ github.workspace }}"
