@@ -17,14 +17,16 @@ jobs:
     steps:
       - name: Setup mingw-w64
         run: |
+          echo "[+] Install mingw-w64"
           sudo apt update
           sudo apt install mingw-w64 -y
+          echo "[+] Check mingw-w64"
           x86_64-w64-mingw32-gcc -v
+          echo "[+] Check make"
           make -v
-      - name: Build by make
-        run: |
-          cd ${{ github.workspace }}
+          echo "[+] Run make"
           make
+          echo "[+] Compress beacon"
           zip -r dist.zip dist
         shell: bash
       - name: Release
