@@ -24,6 +24,8 @@ jobs:
           x86_64-w64-mingw32-gcc -v
           echo "[+] Check make"
           make -v
+          echo "[+] Check project file"
+          ls
           echo "[+] Run make"
           make
           echo "[+] Compress beacon"
