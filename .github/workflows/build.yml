@@ -15,22 +15,15 @@ jobs:
         os: [ubuntu-latest]
 
     steps:
-      - name: list file in workdir
-        run: |
-          echo "[+] Current Path: `pwd`"
-          echo "[+] Workdir: ${{ github.workspace }}"
-          cd ${{ github.workspace }}
-          echo `ls`
-        shell: bash
       - name: Setup mingw-w64
         run: |
           sudo apt update
           sudo apt install mingw-w64 -y
-      - name: build by make
+      - name: Build by make
         run: |
-          cd ${{ github.workspace }}
           make
           zip -r dist.zip dist
+        shell: bash
       - name: Release
         uses: softprops/action-gh-release@v0.1.15
         with:
