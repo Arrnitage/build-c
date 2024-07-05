@@ -15,25 +15,15 @@ jobs:
         os: [ubuntu-latest]
 
     steps:
+      - uses: actions/checkout@v2
       - name: Setup mingw-w64
         run: |
-          echo "[+] Install mingw-w64"
           sudo apt update
           sudo apt install mingw-w64 -y
-          echo "[+] Check mingw-w64"
-          x86_64-w64-mingw32-gcc -v
-          echo "[+] Check make"
-          make -v
-          echo "[+] Check project file"
-          pwd
-          ls -lh ../
-          echo "ls current"
-          ls
-          echo "[+] Run make"
+      - name: Run make
+        run: |
           make
-          echo "[+] Compress beacon"
           zip -r dist.zip dist
-        shell: bash
       - name: Release
         uses: softprops/action-gh-release@v0.1.15
         with:
