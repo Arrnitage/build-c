@@ -1,0 +1,43 @@
+name: build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: list file in workdir
+        run: |
+          echo "[+] Workdir: ${{ github.workspace }}"
+          ls ${{ github.workspace }}
+          mkdir dist
+        shell: bash
+      - name: Setup mingw-w64
+        run: |
+          sudo apt update
+          sudo apt install mingw-w64
+          sudo apt install make
+      - name: build by cmake
+        run: |
+          cd ${{ github.workspace }}
+          make
+          ls
+          zip -r dist.zip dist
+      - name: Release
+        uses: softprops/action-gh-release@v0.1.15
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+          tag_name: v1.0
+          files: |
+            dist.zip
+
