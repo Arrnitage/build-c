@@ -21,6 +21,7 @@ jobs:
           sudo apt install mingw-w64 -y
       - name: Build by make
         run: |
+          cd ${{ github.workspace }}
           make
           zip -r dist.zip dist
         shell: bash
